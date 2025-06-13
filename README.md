@@ -3,7 +3,7 @@
 
 ### 📘 `README.md` for Full Project (client + server in one folder)
 
-```markdown
+markdown
 # B2B Lead CRM Lite – Full Stack Project
 
 This is a full-stack CRM (Customer Relationship Management) application built with the **MERN stack**:
@@ -17,7 +17,7 @@ This is a full-stack CRM (Customer Relationship Management) application built wi
 
 ## 📁 Project Structure
 
-```
+
 
 b2b-lead-crm-lite/
 ├── client/       # Frontend using Vite + React
@@ -25,7 +25,7 @@ b2b-lead-crm-lite/
 ├── .gitignore
 └── README.md     # (This file)
 
-````
+
 
 ---
 
