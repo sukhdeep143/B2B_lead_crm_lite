@@ -2,8 +2,7 @@
 ---
 
 ### 📁 `server/README.md`
-
-````markdown
+markdown
 # B2B Lead CRM Lite – Backend
 
 This is the **backend** for the **B2B Lead CRM Lite** application, built using **Node.js**, **Express**, and **MongoDB**. It provides a RESTful API for user authentication, lead management, and task handling. The backend is connected to a frontend built using Vite + React.
@@ -44,7 +43,7 @@ npm install --save-dev nodemon
 
 ## 📂 Project Structure
 
-```
+
 server/
 ├── config/             # DB connection setup
 │   └── db.js
@@ -63,7 +62,7 @@ server/
 ├── index.js            # Entry point
 ├── package.json
 └── README.md
-```
+
 
 ---
 
@@ -189,5 +188,3 @@ fetch("http://localhost:5000/api/leads", {
 ## 🧑‍💻 Contributors
 
 This project is a part of the **InternPro Team Collaboration**.
-
-```
