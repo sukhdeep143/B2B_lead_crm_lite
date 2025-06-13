@@ -1,25 +1,23 @@
 
----
 
 ### 📄 `CONTRIBUTING.md`
 
-```markdown
+markdown
 # Contributing to B2B Lead CRM Lite
 
 Thank you for your interest in contributing to the **B2B Lead CRM Lite** project! 🚀  
 This guide will help you get started with setting up, collaborating, and contributing effectively.
 
----
+
 
 ## 🧩 Project Structure
 
-```
 
 /client    --> Frontend (React)
 /server    --> Backend (Express + MongoDB)
 /docs      --> Documentation and planning
 
-````
+
 
 ---
 
@@ -39,7 +37,7 @@ This guide will help you get started with setting up, collaborating, and contrib
    ```bash
    git clone https://github.com/<your-username>/B2B_lead_crm_lite.git
    cd B2B_lead_crm_lite
-````
+
 
 3. **Set upstream remote** (once):
 
