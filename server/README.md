@@ -42,8 +42,7 @@ npm install --save-dev nodemon
 ---
 
 ## 📂 Project Structure
-
-
+```
 server/
 ├── config/             # DB connection setup
 │   └── db.js
@@ -62,7 +61,7 @@ server/
 ├── index.js            # Entry point
 ├── package.json
 └── README.md
-
+```
 
 ---
 
