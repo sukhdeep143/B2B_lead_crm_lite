@@ -64,6 +64,20 @@
   font-size: 16px;
   background: #f3f6fa;
   margin-bottom: 8px;
+  transition: border-color 0.2s ease;
+}
+.inputError {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+.input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+.inputError:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
 }
 .submitBtn {
   background: #1976d2;

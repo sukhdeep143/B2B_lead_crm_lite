@@ -1,33 +1,54 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import styles from './Register.module.css';
 
 const Register = () => {
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', role: 'sales' });
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    role: 'sales'
+  };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setError('');
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(2, 'Name must be at least 2 characters')
+      .required('Name is required'),
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm password is required'),
+    role: Yup.string()
+      .oneOf(['sales', 'manager'], 'Invalid role selected')
+      .required('Role is required')
+  });
+
+  const handleSubmit = async (values, { setSubmitting, setFieldError, resetForm }) => {
     setSuccess('');
-    if (form.password !== form.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
     try {
       await axios.post('http://localhost:5000/api/auth/register', {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        role: form.role
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        role: values.role
       });
       setSuccess('Registration successful! You can now log in.');
+      resetForm();
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setFieldError('email', err.response?.data?.message || 'Registration failed');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -42,23 +63,73 @@ const Register = () => {
           <Link to="/login" className={styles.loginBtn}>Login</Link>
         </div>
       </div>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h1 className={styles.heading}>Register</h1>
-        <label className={styles.label}>Name</label>
-        <input name="name" placeholder="Enter your name" value={form.name} onChange={handleChange} required className={styles.input} />
-        <label className={styles.label}>Email</label>
-        <input name="email" type="email" placeholder="Enter your email" value={form.email} onChange={handleChange} required className={styles.input} />
-        <label className={styles.label}>Password</label>
-        <input name="password" type="password" placeholder="Enter your password" value={form.password} onChange={handleChange} required className={styles.input} />
-        <label className={styles.label}>Confirm Password</label>
-        <input name="confirmPassword" type="password" placeholder="Confirm your password" value={form.confirmPassword} onChange={handleChange} required className={styles.input} />
-        <button type="submit" className={styles.submitBtn}>Register</button>
-        {error && <div className={styles.error}>{error}</div>}
-        {success && <div className={styles.success}>{success}</div>}
-        <div className={styles.linkRow}>
-          Already have an account? <Link to="/login" className={styles.link}>Login</Link>
-        </div>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, errors, touched }) => (
+          <Form className={styles.form}>
+            <h1 className={styles.heading}>Register</h1>
+            
+            <label className={styles.label}>Name</label>
+            <Field
+              name="name"
+              placeholder="Enter your name"
+              className={`${styles.input} ${errors.name && touched.name ? styles.inputError : ''}`}
+            />
+            <ErrorMessage name="name" component="div" className={styles.error} />
+            
+            <label className={styles.label}>Email</label>
+            <Field
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              className={`${styles.input} ${errors.email && touched.email ? styles.inputError : ''}`}
+            />
+            <ErrorMessage name="email" component="div" className={styles.error} />
+            
+            <label className={styles.label}>Password</label>
+            <Field
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              className={`${styles.input} ${errors.password && touched.password ? styles.inputError : ''}`}
+            />
+            <ErrorMessage name="password" component="div" className={styles.error} />
+            
+            <label className={styles.label}>Confirm Password</label>
+            <Field
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm your password"
+              className={`${styles.input} ${errors.confirmPassword && touched.confirmPassword ? styles.inputError : ''}`}
+            />
+            <ErrorMessage name="confirmPassword" component="div" className={styles.error} />
+            
+            <label className={styles.label}>Role</label>
+            <Field
+              as="select"
+              name="role"
+              className={`${styles.input} ${errors.role && touched.role ? styles.inputError : ''}`}
+            >
+              <option value="sales">Sales</option>
+              <option value="manager">Manager</option>
+            </Field>
+            <ErrorMessage name="role" component="div" className={styles.error} />
+            
+            <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
+              {isSubmitting ? 'Registering...' : 'Register'}
+            </button>
+            
+            {success && <div className={styles.success}>{success}</div>}
+            
+            <div className={styles.linkRow}>
+              Already have an account? <Link to="/login" className={styles.link}>Login</Link>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
