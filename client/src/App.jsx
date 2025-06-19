@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import AdminRegister from './pages/AdminRegister';
 import './App.css';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/admin-register" element={<AdminRegister />} />
         <Route path="/" element={<div className='bg-red-400'>b2b</div>} />
+        <Route path="/profile" element={<ProfilePage/>}/>
       </Routes>
     </BrowserRouter>
   );
