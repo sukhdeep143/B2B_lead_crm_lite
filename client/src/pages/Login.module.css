@@ -1,96 +1,72 @@
-.pageBg {
-  min-height: 100vh;
-  background: #fafbfc;
-}
-.topNav {
+/* Login.module.css */
+
+.container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 24px 48px 0 48px;
+  height: 100vh; /* full height */
+  background-color: #f9f9f9;
 }
-.logo {
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.5px;
-}
-.navLinks {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.navLink {
-  color: #222;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 400;
-}
-.loginBtn {
-  background: #1976d2;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 7px 18px;
-  font-weight: 500;
-  font-size: 15px;
-  text-decoration: none;
-  margin-left: 12px;
-}
+
 .form {
-  background: #fff;
-  margin: 48px auto 0 120px;
-  padding: 40px 32px 32px 32px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1rem;
 }
+
 .heading {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 18px;
-  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
 }
+
 .label {
-  font-size: 15px;
   font-weight: 500;
-  margin-bottom: 2px;
 }
+
 .input {
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  font-size: 16px;
-  background: #f3f6fa;
-  margin-bottom: 8px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
+
 .submitBtn {
-  background: #1976d2;
-  color: #fff;
+  padding: 0.75rem;
+  background-color: #2563eb; /* Tailwind blue-600 */
+  color: white;
+  font-weight: bold;
   border: none;
-  border-radius: 6px;
-  padding: 12px 0;
-  font-weight: 600;
-  font-size: 16px;
+  border-radius: 4px;
   cursor: pointer;
-  margin-left: auto;
-  margin-top: 8px;
-  width: 110px;
-  display: block;
 }
+
+.submitBtn:hover {
+  background-color: #1e40af; /* Tailwind blue-800 */
+}
+
 .error {
   color: red;
-  text-align: left;
-  font-size: 14px;
+  font-size: 0.9rem;
+  text-align: center;
 }
-.link {
-  color: #1976d2;
-  text-decoration: none;
-  font-weight: 500;
-}
+
 .linkRow {
-  text-align: left;
-  margin-top: 8px;
-  font-size: 14px;
-} 
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.link {
+  color: #2563eb;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
