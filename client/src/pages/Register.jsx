@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./Register.module.css";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -39,24 +41,11 @@ const Register = () => {
   };
 
   return (
+    <div>
+   <Header />
+    
     <div className={styles.pageBg}>
-      <div className={styles.topNav}>
-        <span className={styles.logo}>Lead CRM Lite</span>
-        <div className={styles.navLinks}>
-          <Link to="/" className={styles.navLink}>
-            Home
-          </Link>
-          <Link to="#" className={styles.navLink}>
-            About
-          </Link>
-          <Link to="#" className={styles.navLink}>
-            Contact
-          </Link>
-          <Link to="/login" className={styles.loginBtn}>
-            Login
-          </Link>
-        </div>
-      </div>
+     
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.heading}>Register</h1>
         <label className={styles.label}>Name</label>
@@ -111,6 +100,8 @@ const Register = () => {
         </div>
       </form>
     </div>
+    <Footer />
+     </div>
   );
 };
 

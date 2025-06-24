@@ -1,25 +1,31 @@
-// import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import AdminRegister from './pages/AdminRegister';
-import './App.css';
+import ProfilePage from './pages/Dashboard';
+import AddLead from './pages/LeadPage';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <BrowserRouter>
-      <nav style={{ display: 'flex', gap: 16, padding: 16, borderBottom: '1px solid #eee', marginBottom: 24 }}>
-        <Link to="/">Home</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/login">Login</Link>
-        {/* <Link to="/admin-register">Admin Register</Link> */}
-      </nav>
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/admin-register" element={<AdminRegister />} />
-        <Route path="/" element={<div className='bg-red-400'>b2b</div>} />
-      </Routes>
+    <BrowserRouter >
+      <div className="flex flex-col min-h-screen bg-gray-50">
+       
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin-register" element={<AdminRegister />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/lead" element={<AddLead />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </main>
+  
+      </div>
     </BrowserRouter>
   );
 }

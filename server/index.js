@@ -1,16 +1,22 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import leadsRouter from './routes/leads.js';
+import authRoutes from './routes/auth.js'; // Convert this file too
 
-// Config
+
+
 dotenv.config();
+
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/leads', leadsRouter);
+app.use('/api/auth', authRoutes); // ✅ Make sure this file also uses export/import
 
 // Debug middleware
 app.use((req, res, next) => {
@@ -19,16 +25,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect MongoDB
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.error("MongoDB Error:", err));
 
-// Routes
-const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
-
-// Routes Home Api
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
