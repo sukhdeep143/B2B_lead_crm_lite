@@ -13,7 +13,7 @@ const Header = () => {
           <Link to="/" className="hover:underline">
             Home
           </Link>
-          <Link to="/profile">
+          <Link to="/user-profile">
             <img
               src="/vite.svg"
               alt="Profile"

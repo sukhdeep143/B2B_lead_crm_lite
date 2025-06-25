@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 
-export default function AddLead() {
+export default function LeadPage() {
   const [form, setForm] = useState({
     name: "",
     company: "",

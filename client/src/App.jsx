@@ -4,7 +4,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import AdminRegister from './pages/AdminRegister';
 import ProfilePage from './pages/Dashboard';
-import AddLead from './pages/LeadPage';
+import LeadPage from './pages/LeadPage'
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import UserProfile from './pages/UserProfile';
@@ -21,8 +21,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin-register" element={<AdminRegister />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/lead" element={<AddLead />} />
+            {/* <Route path="/profile" element={<ProfilePage />} /> */}
+            
+            <Route path="/leads" element={<LeadPage />} />
+
             <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/user-profile" element={<UserProfile />} />
 
