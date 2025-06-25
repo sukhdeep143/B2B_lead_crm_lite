@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['admin', 'sales'],
     default: 'sales'
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null, // null for super admin or self-created
   }
 }, {
   timestamps: true
@@ -50,4 +55,4 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User; 
+module.exports = User;

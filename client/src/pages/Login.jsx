@@ -9,31 +9,37 @@ const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
+  
   // Update form data
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+ // Handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        form
-      );
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/login",
+      form
+    );
 
-      // Save token and user info
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+    // Save token and user info
+    const { token, user } = res.data;
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
 
-      // Redirect to Dashboard
-      window.location.href = "/Dashboard";
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed. Please try again.");
-    }
-  };
+    // Redirect based on user role
+    if (user.role === "admin") {
+  window.location.href = "/dashboard";
+} else {
+  window.location.href = "/user-profile";
+}
+  } catch (err) {
+    setError(err.response?.data?.message || "Login failed. Please try again.");
+  }
+};
 
   return (
     <div>
