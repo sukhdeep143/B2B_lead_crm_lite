@@ -8,6 +8,7 @@ import LeadPage from './pages/LeadPage'
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import UserProfile from './pages/UserProfile';
+import About from './pages/About';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/user-profile" element={<UserProfile />} />
 
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
   
