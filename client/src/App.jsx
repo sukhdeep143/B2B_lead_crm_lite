@@ -7,6 +7,8 @@ import ProfilePage from './pages/Dashboard';
 import AddLead from './pages/LeadPage';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
+import About from './pages/About';
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/lead" element={<AddLead />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
   
