@@ -8,7 +8,7 @@ const Home = () => {
     <div >
       <Header />
 
-      <div className="flex flex-col h-screen items-center justify-center text-center py-20 px-4 bg-gray-50">
+      <div className="flex flex-col min-h-screen items-center justify-center text-center py-20 px-4 bg-gray-50">
         <h2 className="text-4xl font-bold text-blue-800 mb-4">
           Welcome to Lead CRM Lite
         </h2>
