@@ -31,12 +31,19 @@ const leadSchema = new mongoose.Schema({
     default: ''
   },
 
-  // ✅ Add this field to track who created the lead
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+
+  // ✅ Admin who created the user that made this lead
+  assignedAdmin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
+
 }, {
   timestamps: true
 });

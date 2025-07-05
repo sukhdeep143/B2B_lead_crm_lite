@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-const auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '');
     
@@ -15,5 +15,3 @@ const auth = async (req, res, next) => {
     res.status(401).json({ message: 'Token is invalid or expired' });
   }
 };
-
-module.exports = auth; 

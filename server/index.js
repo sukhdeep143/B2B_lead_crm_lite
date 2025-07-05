@@ -2,8 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import leadsRouter from './routes/leads.js';
+// import leadsRouter from './routes/leads.js';
 import authRoutes from './routes/auth.js'; // Convert this file too
+import leadRoutes from './routes/leadRoutes.js';
+
+
 
 
 
@@ -15,7 +18,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/leads', leadsRouter);
+
+app.use('/api/leads', leadRoutes);
+// app.use('/api/leads', leadsRouter);
+
 app.use('/api/auth', authRoutes); // ✅ Make sure this file also uses export/import
 
 // Debug middleware
