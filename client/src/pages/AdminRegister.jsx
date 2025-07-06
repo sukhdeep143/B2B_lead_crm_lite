@@ -42,9 +42,9 @@ const AdminRegister = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col ">
       <Header />
-      <main className="flex-grow flex items-center justify-center bg-gray-50 px-4 py-10">
+      <main className="flex-grow  flex items-center justify-center bg-gray-50 px-4 py-10">
         <form onSubmit={handleSubmit} className={`${styles.form} w-full max-w-md`}>
           <h1 className={styles.heading}>Admin Register</h1>
 

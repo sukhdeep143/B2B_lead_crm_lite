@@ -1,5 +1,5 @@
 import Navbar2 from '../components/Navbar2';
-import Sidebar from '../components/Sidebar';
+// import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -48,10 +48,10 @@ const Dashboard = () => {
   return (
     <>
       <Navbar2 toggleSidebar={toggleSidebar} />
-      <div className="flex flex-col h-screen">
-        <div className="flex flex-grow overflow-hidden mt-6">
-          <Sidebar isOpen={sidebarOpen} />
-          <main className="flex-1 overflow-y-auto p-6 bg-gray-50">
+      <div className="flex flex-col  pt-10">
+        <div className="flex flex-grow overflow-hidden ">
+          {/* <Sidebar isOpen={sidebarOpen} /> */}
+         <main className="flex-1 flex justify-center items-center  bg-gray-50">
             <div className="max-w-xl w-full">
               <h1 className="text-2xl font-bold mb-4 text-gray-800">
                 Welcome, {user?.name || 'User'}!
@@ -126,7 +126,7 @@ const Dashboard = () => {
                   <h2 className="text-xl font-semibold mb-4 text-gray-600">
                     Create New User
                   </h2>
-                  <form className="space-y-4" onSubmit={handleCreateUser}>
+                  <form className="space-y-4 pb-44" onSubmit={handleCreateUser}>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Name</label>
                       <input
@@ -173,7 +173,7 @@ const Dashboard = () => {
                     </div>
                     <button
                       type="submit"
-                      className="px-4 py-2 text-sm bg-green-600 text-white rounded font-semibold hover:bg-green-800"
+                      className="px-4 py-2 text-sm bg-green-600 text-white rounded font-semibold hover:bg-green-800 "
                     >
                       Create User
                     </button>
@@ -186,8 +186,8 @@ const Dashboard = () => {
             </div>
           </main>
         </div>
-        <Footer />
       </div>
+        <Footer  />
     </>
   );
 };
