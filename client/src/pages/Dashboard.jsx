@@ -1,5 +1,4 @@
 import Navbar2 from '../components/Navbar2';
-// import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -10,19 +9,40 @@ const Dashboard = () => {
   const [newUser, setNewUser] = useState({ name: '', email: '', password: '', role: 'sales' });
   const [createMsg, setCreateMsg] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [allLeads, setAllLeads] = useState([]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  // Load user from localStorage and fetch leads if admin
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData) {
-      setUser(JSON.parse(userData));
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      if (parsedUser.role === 'admin') {
+        fetchAllLeads();
+      }
     } else {
       window.location.href = '/login';
     }
   }, []);
+
+  // Fetch all leads for admin
+  const fetchAllLeads = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get('http://localhost:5000/api/leads', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setAllLeads(res.data.leads);
+    } catch (err) {
+      console.error('Error loading leads:', err);
+    }
+  };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
@@ -48,10 +68,9 @@ const Dashboard = () => {
   return (
     <>
       <Navbar2 toggleSidebar={toggleSidebar} />
-      <div className="flex flex-col  pt-10">
-        <div className="flex flex-grow overflow-hidden ">
-          {/* <Sidebar isOpen={sidebarOpen} /> */}
-         <main className="flex-1 flex justify-center items-center  bg-gray-50">
+      <div className="flex flex-col pt-10">
+        <div className="flex flex-grow overflow-hidden">
+          <main className="flex-1 flex justify-center items-center bg-gray-50">
             <div className="max-w-xl w-full">
               <h1 className="text-2xl font-bold mb-4 text-gray-800">
                 Welcome, {user?.name || 'User'}!
@@ -110,7 +129,7 @@ const Dashboard = () => {
                 </div>
               </form>
 
-              {/* Admin Only: Show Toggle Button */}
+              {/* Admin Only: Show Create User Button */}
               {user?.role === 'admin' && (
                 <button
                   onClick={() => setShowCreateForm(!showCreateForm)}
@@ -126,7 +145,7 @@ const Dashboard = () => {
                   <h2 className="text-xl font-semibold mb-4 text-gray-600">
                     Create New User
                   </h2>
-                  <form className="space-y-4 pb-44" onSubmit={handleCreateUser}>
+                  <form className="space-y-4 pb-10" onSubmit={handleCreateUser}>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Name</label>
                       <input
@@ -173,7 +192,7 @@ const Dashboard = () => {
                     </div>
                     <button
                       type="submit"
-                      className="px-4 py-2 text-sm bg-green-600 text-white rounded font-semibold hover:bg-green-800 "
+                      className="px-4 py-2 text-sm bg-green-600 text-white rounded font-semibold hover:bg-green-800"
                     >
                       Create User
                     </button>
@@ -183,11 +202,34 @@ const Dashboard = () => {
                   </form>
                 </>
               )}
+
+              {/* Admin Only: Show All Leads */}
+              {user?.role === 'admin' && (
+                <>
+                  <h2 className="text-xl font-semibold mt-10 mb-4 text-gray-600">All Leads</h2>
+                  <div className="space-y-4 pb-20">
+                    {allLeads.length === 0 && <p className="text-gray-600">No leads found.</p>}
+                    {allLeads.map((lead) => (
+                      <div key={lead._id} className="p-4 border rounded shadow-sm bg-white">
+                        <h3 className="font-semibold text-lg">{lead.name}</h3>
+                        <p className="text-gray-700">Email: {lead.email}</p>
+                        <p className="text-gray-700">Phone: {lead.phone}</p>
+                        <p className="text-gray-700">Status: {lead.status}</p>
+                        {lead.createdBy && (
+                          <p className="text-gray-700 mt-2">
+                            <span className="font-semibold">Created by:</span> {lead.createdBy.name} ({lead.createdBy.email})
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </main>
         </div>
       </div>
-        <Footer  />
+      <Footer />
     </>
   );
 };
