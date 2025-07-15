@@ -3,6 +3,19 @@ import Lead from '../models/Lead.js';
 
 const router = express.Router();
 
+
+
+router.get('/all', async (req, res) => {
+  try {
+    const leads = await Lead.find().populate('createdBy', 'name email role');
+    res.json(leads);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 // POST /api/leads
 router.post('/', async (req, res) => {
   try {
