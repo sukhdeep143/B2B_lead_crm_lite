@@ -97,23 +97,31 @@ const Dashboard = () => {
                 Update Profile
               </h2>
 
-              <form className="space-y-4">
-                {/* Name */}
+              <form className="space-y-4 max-w-xl">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Name</label>
-                  <input type="text" defaultValue={user?.name} className="w-full mt-1 px-4 py-2 border rounded border-gray-300" />
+                  <input
+                    type="text"
+                    defaultValue={user?.name}
+                    className="w-full mt-1 px-4 py-2 border rounded border-gray-300"
+                  />
                 </div>
-                {/* Email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Email</label>
-                  <input type="email" defaultValue={user?.email} className="w-full mt-1 px-4 py-2 border rounded border-gray-300" />
+                  <input
+                    type="email"
+                    defaultValue={user?.email}
+                    className="w-full mt-1 px-4 py-2 border rounded border-gray-300"
+                  />
                 </div>
-                {/* Phone */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Phone</label>
-                  <input type="number" placeholder="Enter phone" className="w-full mt-1 px-4 py-2 border rounded border-gray-300 appearance-none" />
+                  <input
+                    type="number"
+                    placeholder="Enter phone"
+                    className="w-full mt-1 px-4 py-2 border rounded border-gray-300 appearance-none"
+                  />
                 </div>
-                {/* Buttons */}
                 <div className="flex space-x-4">
                   <button type="button" className="px-4 py-2 bg-gray-200 rounded font-semibold hover:bg-gray-300">
                     Update Password
@@ -126,7 +134,6 @@ const Dashboard = () => {
 
               {user?.role === 'admin' && (
                 <>
-                  {/* Create User Toggle */}
                   <button
                     onClick={() => setShowCreateForm(!showCreateForm)}
                     className="mt-10 mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
@@ -134,19 +141,46 @@ const Dashboard = () => {
                     {showCreateForm ? 'Cancel' : '+ Create User'}
                   </button>
 
-                  {/* Create User Form */}
                   {showCreateForm && (
                     <>
                       <h2 className="text-xl font-semibold mb-4 text-gray-600">Create New User</h2>
-                      <form className="space-y-4" onSubmit={handleCreateUser}>
-                        <input type="text" placeholder="Name" value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} className="w-full px-4 py-2 border rounded border-gray-300" required />
-                        <input type="email" placeholder="Email" value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} className="w-full px-4 py-2 border rounded border-gray-300" required />
-                        <input type="password" placeholder="Password" value={newUser.password} onChange={(e) => setNewUser({ ...newUser, password: e.target.value })} className="w-full px-4 py-2 border rounded border-gray-300" required />
-                        <select value={newUser.role} onChange={(e) => setNewUser({ ...newUser, role: e.target.value })} className="w-full px-4 py-2 border rounded border-gray-300">
+                      <form className="space-y-4 max-w-xl" onSubmit={handleCreateUser}>
+                        <input
+                          type="text"
+                          placeholder="Name"
+                          value={newUser.name}
+                          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                          className="w-full px-4 py-2 border rounded border-gray-300"
+                          required
+                        />
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          value={newUser.email}
+                          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                          className="w-full px-4 py-2 border rounded border-gray-300"
+                          required
+                        />
+                        <input
+                          type="password"
+                          placeholder="Password"
+                          value={newUser.password}
+                          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                          className="w-full px-4 py-2 border rounded border-gray-300"
+                          required
+                        />
+                        <select
+                          value={newUser.role}
+                          onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                          className="w-full px-4 py-2 border rounded border-gray-300"
+                        >
                           <option value="sales">Sales</option>
                           <option value="admin">Admin</option>
                         </select>
-                        <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded font-semibold hover:bg-green-800">
+                        <button
+                          type="submit"
+                          className="px-4 py-2 bg-green-600 text-white rounded font-semibold hover:bg-green-800"
+                        >
                           Create User
                         </button>
                         {createMsg && <p className="text-sm text-gray-700">{createMsg}</p>}
@@ -154,44 +188,43 @@ const Dashboard = () => {
                     </>
                   )}
 
-                  {/* All Leads Table */}
                   {allLeads.length > 0 && (
                     <div className="mt-10">
                       <h2 className="text-xl font-semibold mb-4 text-gray-700">All Leads</h2>
                       <div className="overflow-x-auto bg-white rounded shadow">
-                        <table className="min-w-full text-sm text-left text-gray-700">
+                        <table className="min-w-[1200px] text-sm text-left text-gray-700">
                           <thead className="bg-blue-50 text-xs font-semibold uppercase border-b border-gray-200">
                             <tr>
-                              <th className="px-6 py-3">Name</th>
-                              <th className="px-6 py-3">Company</th>
-                              <th className="px-6 py-3">Email</th>
-                              <th className="px-6 py-3">Phone</th>
-                              <th className="px-6 py-3">Status</th>
-                              <th className="px-6 py-3">Notes</th>
-                              <th className="px-6 py-3">Created By</th>
-                              <th className="px-6 py-3">Actions</th>
+                              <th className="px-8 py-4">Name</th>
+                              <th className="px-8 py-4">Company</th>
+                              <th className="px-8 py-4">Email</th>
+                              <th className="px-8 py-4">Phone</th>
+                              <th className="px-8 py-4">Status</th>
+                              <th className="px-8 py-4">Notes</th>
+                              <th className="px-8 py-4">Created By</th>
+                              <th className="px-8 py-4">Actions</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-100">
                             {allLeads.map((lead) => (
                               <tr key={lead._id}>
-                                <td className="px-6 py-4">{lead.name}</td>
-                                <td className="px-6 py-4">{lead.company || '-'}</td>
-                                <td className="px-6 py-4">{lead.email}</td>
-                                <td className="px-6 py-4">{lead.phone}</td>
-                                <td className="px-6 py-4">{lead.status}</td>
-                                <td className="px-6 py-4">{lead.notes || '-'}</td>
-                                <td className="px-6 py-4">{lead.createdBy?.name || '-'}</td>
-                                <td className="px-6 py-4 flex gap-2">
+                                <td className="px-8 py-4">{lead.name}</td>
+                                <td className="px-8 py-4">{lead.company || '-'}</td>
+                                <td className="px-8 py-4">{lead.email}</td>
+                                <td className="px-8 py-4">{lead.phone}</td>
+                                <td className="px-8 py-4">{lead.status}</td>
+                                <td className="px-8 py-4">{lead.notes || '-'}</td>
+                                <td className="px-8 py-4">{lead.createdBy?.name || '-'}</td>
+                                <td className="px-8 py-4 flex gap-2">
                                   <button
                                     onClick={() => handleEditLead(lead._id)}
-                                    className="text-blue-600 hover:bg-blue-100 px-2 rounded border border-blue-200"
+                                    className="text-blue-600 hover:bg-blue-100 px-3 py-1 rounded border border-blue-200"
                                   >
                                     Edit
                                   </button>
                                   <button
                                     onClick={() => handleDeleteLead(lead._id)}
-                                    className="text-red-600 hover:bg-red-100 px-2 rounded border border-red-200"
+                                    className="text-red-600 hover:bg-red-100 px-3 py-1 rounded border border-red-200"
                                   >
                                     Delete
                                   </button>
@@ -215,3 +248,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+  

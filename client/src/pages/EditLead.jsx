@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditLead = () => {
-  const { id } = useParams(); // lead ID from route
+  const { id } = useParams();
   const navigate = useNavigate();
   const [lead, setLead] = useState({
     name: '',
@@ -49,7 +49,17 @@ const EditLead = () => {
       });
 
       if (!res.ok) throw new Error('Update failed');
-      navigate('/user-profile');
+
+      // ✅ Decide redirect based on user role
+      const userData = localStorage.getItem('user');
+      const user = userData ? JSON.parse(userData) : null;
+
+      if (user?.role === 'admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/user-profile');
+      }
+
     } catch (err) {
       setError('Failed to update lead');
     } finally {
@@ -57,116 +67,129 @@ const EditLead = () => {
     }
   };
 
+  const handleCancel = () => {
+    const userData = localStorage.getItem('user');
+    const user = userData ? JSON.parse(userData) : null;
+
+    if (user?.role === 'admin') {
+      navigate('/dashboard');
+    } else {
+      navigate('/user-profile');
+    }
+  };
+
   return (
     <>
-    {/* Blue Header */}
+      {/* Blue Header */}
       <header className="bg-blue-600 text-white py-4 px-6 flex justify-between items-center">
         <h1 className="text-xl font-semibold">
-         Edit Lead
+          Edit Lead
         </h1>
-        <button onClick={() => navigate('/user-profile')} className="bg-white text-blue-800 font-semibold px-4 py-2 rounded hover:bg-gray-200">
-          Back to Profile
+        <button
+          onClick={handleCancel}
+          className="bg-white text-blue-800 font-semibold px-4 py-2 rounded hover:bg-gray-200"
+        >
+          Back
         </button>
-
       </header>
-    <div className="min-h-screen bg-gray-50 p-8">
 
-      <div className="max-w-2xl mx-auto bg-white p-6 rounded shadow">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Edit Lead</h2>
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">Edit Lead</h2>
 
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+          {error && <p className="text-red-500 mb-4">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
-            <input
-              name="name"
-              value={lead.name}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                name="name"
+                value={lead.name}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Company</label>
-            <input
-              name="company"
-              value={lead.company}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            />
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Company</label>
+              <input
+                name="company"
+                value={lead.company}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              name="email"
-              type="email"
-              value={lead.email}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            />
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                name="email"
+                type="email"
+                value={lead.email}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Phone</label>
-            <input
-              name="phone"
-              value={lead.phone}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            />
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Phone</label>
+              <input
+                name="phone"
+                value={lead.phone}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Status</label>
-            <select
-              name="status"
-              value={lead.status}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            >
-              <option value="New">New</option>
-              <option value="Contacted">Contacted</option>
-              <option value="Qualified">Qualified</option>
-              <option value="Lost">Lost</option>
-              <option value="Won">Won</option>
-            </select>
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Status</label>
+              <select
+                name="status"
+                value={lead.status}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              >
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Qualified">Qualified</option>
+                <option value="Lost">Lost</option>
+                <option value="Won">Won</option>
+              </select>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Notes</label>
-            <textarea
-              name="notes"
-              value={lead.notes}
-              onChange={handleChange}
-              rows={4}
-              className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            />
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Notes</label>
+              <textarea
+                name="notes"
+                value={lead.notes}
+                onChange={handleChange}
+                rows={4}
+                className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              />
+            </div>
 
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              {loading ? 'Saving...' : 'Save Changes'}
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate('/user-profile')}
-              className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+            <div className="flex justify-between">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              >
+                {loading ? 'Saving...' : 'Save Changes'}
+              </button>
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     </>
   );
 };

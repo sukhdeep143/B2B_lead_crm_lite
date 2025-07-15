@@ -101,48 +101,8 @@ const handleEditLead = (leadId) => {
             <h3 className="text-xl font-semibold text-gray-700 mb-2">Your Leads</h3>
 
             <div className="overflow-x-auto bg-white rounded shadow">
-              {/* <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Name</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Company</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Email</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Phone</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Notes</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {leads.length > 0 ? (
-                    leads.map((lead) => (
-                      <tr key={lead._id}>
-                        <td className="px-4 py-2">{lead.name}</td>
-                        <td className="px-4 py-2">{lead.company || '-'}</td>
-                        <td className="px-4 py-2">{lead.email}</td>
-                        <td className="px-4 py-2">{lead.phone}</td>
-                        <td className="px-4 py-2">{lead.status}</td>
-                        <td className="px-4 py-2">{lead.notes || '-'}</td>
-                        <td className="px-4 py-2">
-                        <button className="text-blue-600 border-1 border-text-blue px-2 rounded hover:bg-blue-100"
-                         onClick={() => handleEditLead(lead._id)}
-                        >Edit</button>
-
-                        <button className="ml-2 text-red-600 border-1 border-text-red px-2 rounded hover:bg-red-100"
-                         onClick={() => handleDeleteLead(lead._id)}
-                        >Delete</button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="6" className="px-4 py-4 text-center text-gray-500">
-                        No leads found.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table> */}
+              
+                 
               <table className="min-w-full text-sm text-left text-gray-700">
     <thead className="bg-blue-50 sticky top-0 z-10 text-xs font-semibold uppercase tracking-wider border-b border-gray-200">
       <tr>
