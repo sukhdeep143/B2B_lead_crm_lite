@@ -36,7 +36,7 @@ const Home = () => {
             Login
           </Link>
           <Link
-            to="/lead"
+            to="/leads"
             className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 font-semibold"
           >
             Add Lead
