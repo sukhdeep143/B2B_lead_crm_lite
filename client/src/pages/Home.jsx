@@ -42,7 +42,7 @@ const Home = () => {
             Add Lead
           </Link>
           <Link
-            to="/profile"
+            to="/user-profile"
             className="bg-gray-700 text-white px-6 py-3 rounded hover:bg-gray-800 font-semibold"
           >
             Profile
