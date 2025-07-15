@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import UserProfile from './pages/UserProfile';
 import About from './pages/About';
+import EditLead from './pages/EditLead';
 
 
 function App() {
@@ -23,12 +24,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/admin-register" element={<AdminRegister />} />
             {/* <Route path="/profile" element={<ProfilePage />} /> */}
-            
             <Route path="/leads" element={<LeadPage />} />
-
             <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/user-profile" element={<UserProfile />} />
-
+            <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/leads/edit/:id" element={<EditLead />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </main>
